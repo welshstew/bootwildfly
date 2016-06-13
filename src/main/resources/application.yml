@@ -16,11 +16,11 @@
 ## ------------------------------------------------------------------------
 logging.level.com.arjuna: DEBUG
 source.broker:
-  url: tcp://localhost:61616
+  url: tcp://source-amq-tcp:61616
   username: admin
   password: admin
 target.broker:
-  url: tcp://localhost:61616
+  url: tcp://target-amq-tcp:61616
   username: admin
   password: admin
 spring.main.sources: bootwildfly.MySpringBootRouter
