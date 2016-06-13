@@ -22,7 +22,7 @@
 
   <profiles>
     <profile>
-      <id>fusesource.repo</id>
+      <id>openshift</id>
       <repositories>
         <repository>
           <id>spring-snapshots</id>
@@ -119,7 +119,7 @@
   </profiles>
 
   <activeProfiles>
-    <activeProfile>fusesource.repo</activeProfile>
+    <activeProfile>openshift</activeProfile>
   </activeProfiles>
 
 </settings>

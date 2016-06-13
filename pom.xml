@@ -95,32 +95,32 @@
 		</plugins>
 	</build>
 
-	<repositories>
+	<!--<repositories>-->
+		<!--&lt;!&ndash;<repository>&ndash;&gt;-->
+			<!--&lt;!&ndash;<id>spring-releases</id>&ndash;&gt;-->
+			<!--&lt;!&ndash;<url>https://repo.spring.io/libs-release</url>&ndash;&gt;-->
+		<!--&lt;!&ndash;</repository>&ndash;&gt;-->
 		<!--<repository>-->
-			<!--<id>spring-releases</id>-->
-			<!--<url>https://repo.spring.io/libs-release</url>-->
+			<!--<id>spring-snapshots</id>-->
+			<!--<name>Spring Snapshots</name>-->
+			<!--<url>https://repo.spring.io/libs-snapshot</url>-->
+			<!--<snapshots>-->
+				<!--<enabled>true</enabled>-->
+			<!--</snapshots>-->
 		<!--</repository>-->
-		<repository>
-			<id>spring-snapshots</id>
-			<name>Spring Snapshots</name>
-			<url>https://repo.spring.io/libs-snapshot</url>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-		</repository>
-	</repositories>
-	<pluginRepositories>
+	<!--</repositories>-->
+	<!--<pluginRepositories>-->
+		<!--&lt;!&ndash;<pluginRepository>&ndash;&gt;-->
+			<!--&lt;!&ndash;<id>spring-releases</id>&ndash;&gt;-->
+			<!--&lt;!&ndash;<url>https://repo.spring.io/libs-release</url>&ndash;&gt;-->
+		<!--&lt;!&ndash;</pluginRepository>&ndash;&gt;-->
 		<!--<pluginRepository>-->
-			<!--<id>spring-releases</id>-->
-			<!--<url>https://repo.spring.io/libs-release</url>-->
+			<!--<id>spring-snapshots</id>-->
+			<!--<name>Spring Snapshots</name>-->
+			<!--<url>https://repo.spring.io/libs-snapshot</url>-->
+			<!--<snapshots>-->
+				<!--<enabled>true</enabled>-->
+			<!--</snapshots>-->
 		<!--</pluginRepository>-->
-		<pluginRepository>
-			<id>spring-snapshots</id>
-			<name>Spring Snapshots</name>
-			<url>https://repo.spring.io/libs-snapshot</url>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-		</pluginRepository>
-	</pluginRepositories>
+	<!--</pluginRepositories>-->
 </project>
