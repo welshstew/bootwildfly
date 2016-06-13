@@ -95,32 +95,96 @@
 		</plugins>
 	</build>
 
-	<!--<repositories>-->
-		<!--&lt;!&ndash;<repository>&ndash;&gt;-->
-			<!--&lt;!&ndash;<id>spring-releases</id>&ndash;&gt;-->
-			<!--&lt;!&ndash;<url>https://repo.spring.io/libs-release</url>&ndash;&gt;-->
-		<!--&lt;!&ndash;</repository>&ndash;&gt;-->
-		<!--<repository>-->
-			<!--<id>spring-snapshots</id>-->
-			<!--<name>Spring Snapshots</name>-->
-			<!--<url>https://repo.spring.io/libs-snapshot</url>-->
-			<!--<snapshots>-->
-				<!--<enabled>true</enabled>-->
-			<!--</snapshots>-->
-		<!--</repository>-->
-	<!--</repositories>-->
-	<!--<pluginRepositories>-->
-		<!--&lt;!&ndash;<pluginRepository>&ndash;&gt;-->
-			<!--&lt;!&ndash;<id>spring-releases</id>&ndash;&gt;-->
-			<!--&lt;!&ndash;<url>https://repo.spring.io/libs-release</url>&ndash;&gt;-->
-		<!--&lt;!&ndash;</pluginRepository>&ndash;&gt;-->
-		<!--<pluginRepository>-->
-			<!--<id>spring-snapshots</id>-->
-			<!--<name>Spring Snapshots</name>-->
-			<!--<url>https://repo.spring.io/libs-snapshot</url>-->
-			<!--<snapshots>-->
-				<!--<enabled>true</enabled>-->
-			<!--</snapshots>-->
-		<!--</pluginRepository>-->
-	<!--</pluginRepositories>-->
+	<repositories>
+		<repository>
+			<id>spring-snapshots</id>
+			<name>Spring Snapshots</name>
+			<url>https://repo.spring.io/libs-snapshot</url>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+		<repository>
+			<id>fusesource.m2</id>
+			<name>FuseSource Community Release Repository</name>
+			<url>https://repo.fusesource.com/nexus/content/groups/public</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<releases>
+				<enabled>true</enabled>
+				<updatePolicy>never</updatePolicy>
+			</releases>
+		</repository>
+		<repository>
+			<id>fusesource.ea</id>
+			<name>FuseSource Community Early Access Release Repository</name>
+			<url>https://repo.fusesource.com/nexus/content/groups/ea</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<releases>
+				<enabled>true</enabled>
+				<updatePolicy>never</updatePolicy>
+			</releases>
+		</repository>
+		<repository>
+			<id>redhat.ga</id>
+			<name>Red Hat General Availability Repository</name>
+			<url>https://maven.repository.redhat.com/ga</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<releases>
+				<enabled>true</enabled>
+				<updatePolicy>never</updatePolicy>
+			</releases>
+		</repository>
+	</repositories>
+	<pluginRepositories>
+		<pluginRepository>
+			<id>spring-snapshots</id>
+			<name>Spring Snapshots</name>
+			<url>https://repo.spring.io/libs-snapshot</url>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</pluginRepository>
+		<pluginRepository>
+			<id>fusesource.m2</id>
+			<name>FuseSource Community Release Repository</name>
+			<url>https://repo.fusesource.com/nexus/content/groups/public</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<releases>
+				<enabled>true</enabled>
+				<updatePolicy>never</updatePolicy>
+			</releases>
+		</pluginRepository>
+		<pluginRepository>
+			<id>fusesource.ea</id>
+			<name>FuseSource Community Early Access Release Repository</name>
+			<url>https://repo.fusesource.com/nexus/content/groups/ea</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<releases>
+				<enabled>true</enabled>
+				<updatePolicy>never</updatePolicy>
+			</releases>
+		</pluginRepository>
+		<pluginRepository>
+			<id>redhat.ga</id>
+			<name>Red Hat General Availability Repository</name>
+			<url>https://maven.repository.redhat.com/ga</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<releases>
+				<enabled>true</enabled>
+				<updatePolicy>never</updatePolicy>
+			</releases>
+		</pluginRepository>
+	</pluginRepositories>
 </project>
