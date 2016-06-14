@@ -18,6 +18,8 @@ logging.level:
   org:
     springframework.camel: DEBUG
     apache.camel: DEBUG
+    springframework.transaction: DEBUG
+    springframework.jms: DEBUG
   com.arjuna: DEBUG
 source.broker:
   url: tcp://source-amq-tcp:61616
