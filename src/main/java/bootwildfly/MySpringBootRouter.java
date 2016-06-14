@@ -22,6 +22,7 @@ import org.apache.activemq.RedeliveryPolicy;
 import org.apache.activemq.camel.component.ActiveMQComponent;
 import org.apache.activemq.camel.component.ActiveMQConfiguration;
 import org.apache.activemq.pool.ActiveMQResourceManager;
+import org.apache.activemq.pool.JcaPooledConnectionFactory;
 import org.apache.activemq.pool.XaPooledConnectionFactory;
 import org.apache.camel.spring.boot.FatJarRouter;
 import org.apache.camel.spring.spi.SpringTransactionPolicy;
@@ -107,35 +108,45 @@ public class MySpringBootRouter extends FatJarRouter {
         return amqSourceConFac;
     }
 
-//    @Primary
-//    @Bean
-//    JcaPooledConnectionFactory amqSourceJcaPooledConnectionFactory(){
-//        JcaPooledConnectionFactory jca = new JcaPooledConnectionFactory();
-//        jca.setName("activemq.source");
-//        jca.setMaxConnections(1);
-//        jca.setConnectionFactory(amqSourceConnectionFactory());
-//        jca.setTransactionManager(TransactionManager.transactionManager());
-//        return jca;
-//    }
-
     @Primary
     @Bean
-    XaPooledConnectionFactory amqSourceXAPooledConnectionFactory(){
-        XaPooledConnectionFactory xa = new XaPooledConnectionFactory();
-//        xa.setName("activemq.source");
-        xa.setMaxConnections(1);
-        xa.setConnectionFactory(amqSourceConnectionFactory());
-        xa.setTransactionManager(TransactionManager.transactionManager());
-        return xa;
+    JcaPooledConnectionFactory amqSourceJcaPooledConnectionFactory(){
+        JcaPooledConnectionFactory jca = new JcaPooledConnectionFactory();
+        jca.setName("activemq.source");
+        jca.setMaxConnections(1);
+        jca.setConnectionFactory(amqSourceConnectionFactory());
+        jca.setTransactionManager(TransactionManager.transactionManager());
+        return jca;
     }
+
+    @Bean
+    ActiveMQResourceManager amqSourceResourceManager() {
+        ActiveMQResourceManager activeMQResourceManager = new ActiveMQResourceManager();
+        activeMQResourceManager.setTransactionManager(TransactionManager.transactionManager());
+        activeMQResourceManager.setConnectionFactory(amqSourceJcaPooledConnectionFactory());
+        activeMQResourceManager.setResourceName("activemq.source");
+        activeMQResourceManager.recoverResource();
+        return activeMQResourceManager;
+    }
+
+//    <bean id="rm-source-amq" class="org.apache.activemq.pool.ActiveMQResourceManager" init-method="recoverResource">
+//    <property name="transactionManager" ref="recoverableTxManager" />
+//    <!-- CF must be of type ActiveMQConnectionFactory, otherwise no recovery will occur -->
+//    <property name="connectionFactory" ref="AmqXaCF" />
+//    <property name="userName" value="${username}" />
+//    <property name="password" value="${password}" />
+//    <!-- name needs to match name property set on JcaPooledConnectionFactory above -->
+//    <property name="resourceName" value="activemq.source" />
+//    </bean>
+
+
+
+
 
     @Bean
     ActiveMQConfiguration amqSourceConfiguration(){
         ActiveMQConfiguration jcSource = new ActiveMQConfiguration();
-//        jcSource.setConnectionFactory(amqSourceJcaPooledConnectionFactory());
-
-        jcSource.setConnectionFactory(amqSourceXAPooledConnectionFactory());
-
+        jcSource.setConnectionFactory(amqSourceJcaPooledConnectionFactory());
 //        We set local transactions to false, because the JtaTransactionManager
 //        will take care of enrolling the XA JMS Connection when needed.
         jcSource.setTransacted(false);
@@ -143,17 +154,6 @@ public class MySpringBootRouter extends FatJarRouter {
         jcSource.setMaxConcurrentConsumers(1);
         jcSource.setCacheLevelName("CACHE_NONE");
         return jcSource;
-    }
-
-    @Bean
-    ActiveMQResourceManager amqSourceResourceManager(){
-        ActiveMQResourceManager amrm = new ActiveMQResourceManager();
-        amrm.setTransactionManager(TransactionManager.transactionManager());
-        amrm.setConnectionFactory(amqSourceConnectionFactory());
-        amrm.setUserName(sourceBrokerUsername);
-        amrm.setPassword(sourceBrokerPassword);
-        amrm.setResourceName("activemq.source");
-        return amrm;
     }
 
     @Bean
@@ -173,33 +173,21 @@ public class MySpringBootRouter extends FatJarRouter {
         return targetCF;
     }
 
-//    @Bean
-//    JcaPooledConnectionFactory amqTargetJcaPooledConnectionFactory(){
-//        JcaPooledConnectionFactory jca = new JcaPooledConnectionFactory();
-//        jca.setName("activemq.target");
-//        jca.setMaxConnections(1);
-//        jca.setConnectionFactory(targetCF());
-//        jca.setTransactionManager(TransactionManager.transactionManager());
-//        return jca;
-//    }
-
     @Bean
-    XaPooledConnectionFactory amqTargetXAPooledConnectionFactory(){
-        XaPooledConnectionFactory xa = new XaPooledConnectionFactory();
-//        xa.setName("activemq.source");
-        xa.setMaxConnections(1);
-        xa.setConnectionFactory(targetCF());
-        xa.setTransactionManager(TransactionManager.transactionManager());
-        return xa;
+    JcaPooledConnectionFactory amqTargetJcaPooledConnectionFactory(){
+        JcaPooledConnectionFactory jca = new JcaPooledConnectionFactory();
+        jca.setName("activemq.target");
+        jca.setMaxConnections(1);
+        jca.setConnectionFactory(targetCF());
+        jca.setTransactionManager(TransactionManager.transactionManager());
+        return jca;
     }
+
 
     @Bean
     ActiveMQConfiguration amqTargetConfiguration(){
         ActiveMQConfiguration ac = new ActiveMQConfiguration();
-//        ac.setConnectionFactory(amqTargetJcaPooledConnectionFactory());
-        ac.setConnectionFactory(amqTargetXAPooledConnectionFactory());
-
-
+        ac.setConnectionFactory(amqTargetJcaPooledConnectionFactory());
 //        We set local transactions to false, because the JtaTransactionManager
 //        will take care of enrolling the XA JMS Connection when needed.
         ac.setTransacted(false);
@@ -213,11 +201,11 @@ public class MySpringBootRouter extends FatJarRouter {
     ActiveMQResourceManager amqTargetResourceManager(){
         ActiveMQResourceManager amrm = new ActiveMQResourceManager();
         amrm.setTransactionManager(TransactionManager.transactionManager());
-//        amrm.setConnectionFactory(amqTargetJcaPooledConnectionFactory());
-        amrm.setConnectionFactory(amqTargetXAPooledConnectionFactory());
+        amrm.setConnectionFactory(amqTargetJcaPooledConnectionFactory());
         amrm.setUserName(targetBrokerUsername);
         amrm.setPassword(targetBrokerPassword);
-//        amrm.setResourceName("activemq.target");
+        amrm.setResourceName("activemq.target");
+        amrm.recoverResource();
         return amrm;
     }
 
