@@ -125,7 +125,7 @@ public class MySpringBootRouter extends FatJarRouter {
         jca.setName("activemq.source");
         jca.setMaxConnections(1);
         jca.setConnectionFactory(amqSourceConnectionFactory());
-        jca.setTransactionManager(narayana);
+        jca.setTransactionManager(TransactionManager.transactionManager());
         return jca;
     }
 
@@ -145,7 +145,7 @@ public class MySpringBootRouter extends FatJarRouter {
     @Bean
     ActiveMQResourceManager amqSourceResourceManager(){
         ActiveMQResourceManager amrm = new ActiveMQResourceManager();
-        amrm.setTransactionManager(narayana);
+        amrm.setTransactionManager(TransactionManager.transactionManager());
         amrm.setConnectionFactory(amqSourceConnectionFactory());
         amrm.setUserName(sourceBrokerUsername);
         amrm.setPassword(sourceBrokerPassword);
@@ -176,7 +176,7 @@ public class MySpringBootRouter extends FatJarRouter {
         jca.setName("activemq.target");
         jca.setMaxConnections(1);
         jca.setConnectionFactory(targetCF());
-        jca.setTransactionManager(narayana);
+        jca.setTransactionManager(TransactionManager.transactionManager());
         return jca;
     }
 
@@ -196,7 +196,7 @@ public class MySpringBootRouter extends FatJarRouter {
     @Bean
     ActiveMQResourceManager amqTargetResourceManager(){
         ActiveMQResourceManager amrm = new ActiveMQResourceManager();
-        amrm.setTransactionManager(narayana);
+        amrm.setTransactionManager(TransactionManager.transactionManager());
         amrm.setConnectionFactory(amqTargetJcaPooledConnectionFactory());
         amrm.setUserName(targetBrokerUsername);
         amrm.setPassword(targetBrokerPassword);
