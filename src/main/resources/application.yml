@@ -14,8 +14,11 @@
 ## See the License for the specific language governing permissions and
 ## limitations under the License.
 ## ------------------------------------------------------------------------
-logging.level.org.apache.camel: DEBUG
-logging.level.com.arjuna: DEBUG
+logging.level:
+  org:
+    springframework.camel: DEBUG
+    apache.camel: DEBUG
+  com.arjuna: DEBUG
 source.broker:
   url: tcp://source-amq-tcp:61616
   username: admin
