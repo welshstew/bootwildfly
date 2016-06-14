@@ -60,9 +60,9 @@ public class MySpringBootRouter extends FatJarRouter {
 
     @Override
     public void configure() {
-        from("timer:trigger?period=30000")
-                .transform().simple("ref:myBean")
-                .to("amqSource:queue:input");
+//        from("timer:trigger?period=30000")
+//                .transform().simple("ref:myBean")
+//                .to("amqSource:queue:input");
 
         from("amqSource:queue:input")
                 .transacted("springTransactionPolicy")
