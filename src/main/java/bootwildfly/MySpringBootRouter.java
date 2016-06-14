@@ -16,6 +16,7 @@
  */
 package bootwildfly;
 
+import com.arjuna.ats.jta.TransactionManager;
 import org.apache.activemq.ActiveMQXAConnectionFactory;
 import org.apache.activemq.RedeliveryPolicy;
 import org.apache.activemq.camel.component.ActiveMQComponent;
@@ -32,8 +33,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Primary;
 import org.springframework.transaction.PlatformTransactionManager;
-
-import javax.transaction.TransactionManager;
 
 @SpringBootApplication
 public class MySpringBootRouter extends FatJarRouter {
