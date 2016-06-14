@@ -62,18 +62,13 @@ public class MySpringBootRouter extends FatJarRouter {
 
     @Override
     public void configure() {
-        from("timer:trigger")
+        from("timer:trigger?period=30000")
                 .transform().simple("ref:myBean")
-                .to("log:out");
+                .to("amqSource:queue:input");
 
         from("amqSource:queue:input")
                 .transacted("springTransactionPolicy")
                 .to("amqTarget:queue:output");
-
-//        from("timer:status")
-////            .bean(health, "invoke")
-//            .log("Health is ${body}");
-
 
     }
 
