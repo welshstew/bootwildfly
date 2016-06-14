@@ -82,10 +82,6 @@ public class MySpringBootRouter extends FatJarRouter {
         return "I'm Spring bean!";
     }
 
-    @Autowired
-    TransactionManager narayana;
-
-
 
     @Autowired
     PlatformTransactionManager platformTransactionManager;
