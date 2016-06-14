@@ -122,6 +122,7 @@ public class MySpringBootRouter extends FatJarRouter {
 //        return jca;
 //    }
 
+    @Primary
     @Bean
     XaPooledConnectionFactory amqSourceXAPooledConnectionFactory(){
         XaPooledConnectionFactory xa = new XaPooledConnectionFactory();
