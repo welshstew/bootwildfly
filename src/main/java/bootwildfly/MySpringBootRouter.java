@@ -23,7 +23,7 @@ import org.apache.activemq.camel.component.ActiveMQComponent;
 import org.apache.activemq.camel.component.ActiveMQConfiguration;
 import org.apache.activemq.pool.ActiveMQResourceManager;
 import org.apache.activemq.pool.JcaPooledConnectionFactory;
-import org.apache.activemq.pool.XaPooledConnectionFactory;
+import org.apache.camel.Processor;
 import org.apache.camel.spring.boot.FatJarRouter;
 import org.apache.camel.spring.spi.SpringTransactionPolicy;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,9 +67,19 @@ public class MySpringBootRouter extends FatJarRouter {
 
         from("amqSource:queue:input")
                 .transacted("springTransactionPolicy")
+                .log("Received msg with JMSRedelivered:${header.JMSRedelivered}")
+                .process(errorGenerator())
                 .to("amqTarget:queue:output");
 
     }
+
+    @Bean
+    Processor errorGenerator(){
+        TestProcessor tp = new TestProcessor();
+        tp.setSimulateProcessingError(true);
+        return tp;
+    }
+
 
     @Bean
     String myBean() {
