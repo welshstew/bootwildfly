@@ -43,21 +43,6 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
-		<!--<dependency>-->
-			<!--<groupId>org.jboss.narayana.jta</groupId>-->
-			<!--<artifactId>narayana-jta</artifactId>-->
-			<!--<version>5.3.2.Final</version>-->
-		<!--</dependency>-->
-		<!--<dependency>-->
-			<!--<groupId>org.jboss.narayana.jta</groupId>-->
-			<!--<artifactId>jms</artifactId>-->
-			<!--<version>5.3.2.Final</version>-->
-		<!--</dependency>-->
-		<!--<dependency>-->
-			<!--<groupId>org.jboss.narayana.jts</groupId>-->
-			<!--<artifactId>narayana-jts-integration</artifactId>-->
-			<!--<version>5.3.2.Final</version>-->
-		<!--</dependency>-->
 		<dependency>
 			<groupId>org.apache.camel</groupId>
 			<artifactId>camel-spring-boot</artifactId>
